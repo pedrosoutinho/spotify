@@ -13,12 +13,13 @@
     min-height: 100%;
    }
 body{
- /* overflow-x: hidden; */
+ overflow-x: hidden;
  margin: 0;
  border: 0;   
  font-family: 'Gotham';
- background: black;
- color: white;
+ /* background: black; */
+ background: #ffcc00;
+ background: linear-gradient(180deg, #ffcc00 5%, rgba(0,0,0,1) 95%); color: white;
 }
 header{
     display: flex;
