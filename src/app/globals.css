@@ -100,7 +100,7 @@ main{
     margin-bottom: 30px;
 }
 footer{
-    position: absolute;
+    position: fixed;
     bottom: 0;
     width: 100vw;
     background-color: #333;
