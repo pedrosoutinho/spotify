@@ -2,7 +2,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 export default function Page() {
     return(
-    <>
+    <main>
         {/* FAQ com itens colapsáveis  */}
         <div className="container mt-3">
             <h1 className="text">Ajuda rápida</h1>
@@ -143,9 +143,8 @@ export default function Page() {
                 </div>
             </div>
         </div>
-        <br />
         {/* Tabela de planos */}
-        <div className="container">
+        <div className="container" mt-3>
             <h1 className="text">Diferença entre os planos: </h1>
             <table className="table mt-3">
                 <thead>
@@ -204,6 +203,7 @@ export default function Page() {
                 </tbody>
             </table>
         </div>
-    </>);
+         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js" integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossOrigin="anonymous"></script>
+    </main>);
 }
 

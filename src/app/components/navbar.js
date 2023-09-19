@@ -11,7 +11,7 @@ export default function Navbar() {
             <nav>
                 <ul>
                     <li>
-                        Pesquisar
+                        <Link href="/pesquisar">Pesquisar</Link>
                     </li>
                     <li>
                         <Link href="/suporte">Suporte</Link>
