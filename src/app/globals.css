@@ -1,3 +1,7 @@
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+
 /* @font-face { */
 /*     font-family: 'Gotham'; */
 /*     src: url('fonts/Gotham-Bold.eot'); /* IE9 Compat Modes */ */
@@ -99,6 +103,7 @@ main{
     width: 80%;
     margin-bottom: 30px;
 }
+
 footer{
     position: fixed;
     bottom: 0;
@@ -108,4 +113,141 @@ footer{
     text-align: center;
     padding: 0.5rem 0;
   }
+
+.albumGrid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: repeat(2, 1fr);
+  grid-gap: 0px;
+}
+
+.albumItem {
+  text-align: center;
+  text-decoration: none;
+  color: #333;
+}
+
+.albumItem img {
+  max-width: 100%;
+  max-height: 100%;
+}
+
+
+/* .album-player { */
+/*   display: flex; */
+/*   align-items: center; */
+/*   padding: 20px; */
+/* } */
+
+/* .album-cover { */
+/*   width: 200px; */
+/*   height: 200px; */
+/*   border-radius: 4px; */
+/*   margin-right: 20px; */
+/*   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); */
+/* } */
+
+/* .album-details { */
+/*   flex-grow: 1; */
+/* } */
+
+/* .song-item { */
+/*   display: flex; */
+/*   justify-content: space-between; */
+/*   align-items: center; */
+/*   cursor: pointer; */
+/*   padding: 10px 0; */
+/*   border-bottom: 1px solid #eee; */
+/*   width: 100%; */
+/* } */
+
+/* .song-item:hover { */
+/*   background-color: #f4f4f4; */
+/* } */
+
+/* .song-details { */
+/*   display: flex; */
+/*   align-items: center; */
+/*   width: 70%; */
+/* } */
+
+/* .song-duration { */
+/*   font-weight: bold; */
+/*   width: 30%; */
+/* } */
+
+.album-player {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+}
+
+.album-info {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.album-cover {
+  width: 150px;
+  height: 150px;
+  border-radius: 4px;
+  margin-right: 20px;
+}
+
+.album-details {
+  display: flex;
+  flex-direction: column;
+}
+
+.album-name {
+  font-size: 24px;
+  font-weight: bold;
+  margin: 0;
+}
+
+.artist-name {
+  font-size: 18px;
+  color: #888;
+  margin: 0;
+}
+
+.track-list table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.track-list th {
+  text-align: left;
+  padding: 8px;
+  background-color: #f5f5f5;
+}
+
+.track-list th:first-child {
+  width: 20px;
+}
+
+.track-list th:last-child {
+  width: 60px;
+}
+
+.track-list td {
+  padding: 8px;
+  border-top: 1px solid #ddd;
+}
+
+button {
+  padding: 4px 8px;
+  background-color: #1db954;
+  color: white;
+  border: none;
+  cursor: pointer;
+  font-size: 14px;
+  border-radius: 4px;
+}
+
+button:hover {
+  background-color: #1aa44b;
+}
 
