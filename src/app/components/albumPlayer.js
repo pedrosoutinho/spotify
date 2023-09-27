@@ -323,7 +323,7 @@ export default function AlbumPlayer({ albumId }) {
         <div className="col-md-4">
           <img className="w-100 rounded mb-4" src={`/a${albumId}.png`} alt={album.name} />
           <h2 className="text-2xl font-bold">{album.name}</h2>
-          <p className="text-muted">{album.artist}</p>
+          <p>{album.artist}</p>
         </div>
         <div className="col-md-8">
           <table className="table table-bordered">
