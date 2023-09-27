@@ -11,7 +11,7 @@ export default function Navbar() {
             <nav>
                 <ul>
                     <li>
-                        <Link href="/pesquisar">Pesquisar</Link>
+                        <Link href="/playlists">Playlists</Link>
                     </li>
                     <li>
                         <Link href="/suporte">Suporte</Link>
@@ -23,7 +23,7 @@ export default function Navbar() {
                         <Link href="/login">Login</Link>
                     </li>
                     <li>
-                        <Link href="/cadastro">Cadastro</Link>
+                        <Link href="/cadastro">Inscrever-se</Link>
                     </li>
                 </ul>
             </nav>
