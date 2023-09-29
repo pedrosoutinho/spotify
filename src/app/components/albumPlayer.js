@@ -318,43 +318,43 @@ export default function AlbumPlayer({ albumId }) {
 
 
     return (
-    <div className="container mt-4">
-      <div className="row">
-        <div className="col-md-4">
-          <img className="w-100 rounded mb-4" src={`/a${albumId}.png`} alt={album.name} />
-          <h2 className="text-2xl font-bold">{album.name}</h2>
-          <p>{album.artist}</p>
+        <div className="container">
+            <div className="row">
+                <div className="col-md-4">
+                    <img className="w-100 rounded mb-4" src={`/a${albumId}.png`} alt={album.name} />
+                    <h2 className="text-2xl font-bold">{album.name}</h2>
+                    <p>{album.artist}</p>
+                </div>
+                <div className="col-md-8" style={{height:'600px', overflow:'scroll'}}>
+                    <table className="table table-bordered">
+                        <thead className="bg-gray-100">
+                            <tr>
+                                <th>#</th>
+                                <th>Title</th>
+                                <th>Duration</th>
+                                <th>Play</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {album.songs.map((song, index) => (
+                                <tr key={index}>
+                                    <td>{index + 1}</td>
+                                    <td>{song}</td>
+                                    <td>{album.durations[index]}</td>
+                                    <td>
+                                        <button
+                                            onClick={() => handlePlay(song)}
+                                            className="btn btn-success"
+                                        >
+                                            Play
+                                        </button>
+                                    </td>
+                                </tr>
+                            ))}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
         </div>
-        <div className="col-md-8">
-          <table className="table table-bordered">
-            <thead className="bg-gray-100">
-              <tr>
-                <th>#</th>
-                <th>Title</th>
-                <th>Duration</th>
-                <th>Play</th>
-              </tr>
-            </thead>
-            <tbody>
-              {album.songs.map((song, index) => (
-                <tr key={index}>
-                  <td>{index + 1}</td>
-                  <td>{song}</td>
-                  <td>{album.durations[index]}</td>
-                  <td>
-                    <button
-                      onClick={() => handlePlay(song)}
-                      className="btn btn-success"
-                    >
-                      Play
-                    </button>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-      </div>
-    </div>
-  );
+    );
 };

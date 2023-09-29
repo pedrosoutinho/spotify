@@ -88,7 +88,6 @@ nav li a:hover{
     cursor: pointer;
 }
 main{
-    width: 100vw;
     height: 100vh;
     display: flex;
     flex-direction: column;
