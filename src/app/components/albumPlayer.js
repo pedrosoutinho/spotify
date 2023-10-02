@@ -1,4 +1,4 @@
-import albumjson from './albumData.json';
+import albumjson from '../data/albumData.json';
 
 export default function AlbumPlayer({ albumId }) {
 
@@ -7,7 +7,6 @@ export default function AlbumPlayer({ albumId }) {
     if (!album) {
         return <div>Album not found</div>;
     }
-
 
     return (
         <div className="container">
