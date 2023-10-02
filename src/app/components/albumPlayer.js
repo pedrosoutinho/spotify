@@ -12,7 +12,7 @@ export default function AlbumPlayer({ albumId }) {
         <div className="container">
             <div className="row">
                 <div className="col-md-4">
-                    <img className="w-100 rounded mb-4" src={`/a${albumId}.png`} alt={album.name} />
+                    <img className="w-100 rounded mb-4" src={`/a${albumId}/cover.png`} alt={album.name} />
                     <h2 className="text-2xl font-bold">{album.name}</h2>
                     <p>{album.artist}</p>
                 </div>
