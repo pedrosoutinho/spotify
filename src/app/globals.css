@@ -60,7 +60,9 @@ nav ul{
 nav li{
     width: 50%;
     align-items: center;
-    margin: 15px;
+    display: flex;
+    justify-content: center;
+    margin: 0 15px;
 }
 nav li a{
     text-decoration: none;
@@ -104,6 +106,7 @@ footer{
     position: fixed;
     bottom: 0;
     width: 100vw;
+    height: 5%;
     background-color: #333;
     color: white;
     text-align: center;

@@ -1,8 +1,22 @@
+import { useState } from 'react';
 import albumjson from 'data/albumData.json';
+import PlayPauseButton from './PlayPauseButton';
+import MusicPlayerBar from './MusicPlayerBar';
 
 export default function AlbumPlayer({ albumId }) {
+    const [currentSong, setCurrentSong] = useState(null);
+    const [isPlaying, setIsPlaying] = useState(false);
 
     const album = albumjson.albumData[albumId - 1];
+
+    const handlePlay = (song) => {
+        if (currentSong && currentSong.src === song.src) {
+            setIsPlaying(!isPlaying);
+        } else {
+            setCurrentSong(song);
+            setIsPlaying(true);
+        }
+    };
 
     if (!album) {
         return <div>Album not found</div>;
@@ -28,15 +42,21 @@ export default function AlbumPlayer({ albumId }) {
                         </thead>
                         <tbody>
                             {album.songs.map((song, index) => (
-                                <tr>
+                                <tr key={index}>
                                     <td>{index + 1}</td>
                                     <td>{song}</td>
                                     <td>{album.durations[index]}</td>
                                     <td>
-                                        <audio controls>
-                                            <source src={`/a${albumId}/${index + 1}.flac`} type="audio/flac" />
-                                            Erro: Seu navegador não suporta o elemento <code>audio</code>.
-                                        </audio>
+                                        <PlayPauseButton
+                                            song={{
+                                                title: song,
+                                                artist: album.artist,
+                                                albumCover: `/a${albumId}/cover.png`,
+                                                src: `/a${albumId}/${index + 1}.flac`,
+                                                duration: album.durations[index]
+                                            }}
+                                            onPlay={handlePlay}
+                                        />
                                     </td>
                                 </tr>
                             ))}
@@ -44,6 +64,8 @@ export default function AlbumPlayer({ albumId }) {
                     </table>
                 </div>
             </div>
+            {currentSong && <MusicPlayerBar song={currentSong} isPlaying={isPlaying} />}
         </div>
     );
-};
+}
+
