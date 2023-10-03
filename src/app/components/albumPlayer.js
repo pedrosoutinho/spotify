@@ -9,6 +9,7 @@ export default function AlbumPlayer({ albumId }) {
 
     const album = albumjson.albumData[albumId - 1];
 
+
     const handlePlay = (song) => {
         if (currentSong && currentSong.src === song.src) {
             setIsPlaying(!isPlaying);
@@ -17,6 +18,7 @@ export default function AlbumPlayer({ albumId }) {
             setIsPlaying(true);
         }
     };
+
 
     if (!album) {
         return <div>Album not found</div>;
@@ -56,6 +58,8 @@ export default function AlbumPlayer({ albumId }) {
                                                 duration: album.durations[index]
                                             }}
                                             onPlay={handlePlay}
+                                            currentPlayingSrc={currentSong ? currentSong.src : null}
+                                            isPlaying={isPlaying}
                                         />
                                     </td>
                                 </tr>

@@ -1,8 +1,13 @@
 import { useState, useEffect, useRef } from 'react';
 
+const formatTime = (seconds) => {
+    const mins = Math.floor(seconds / 60);
+    const secs = seconds % 60;
+    return `${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
+};
+
 const convertDurationToSeconds = (duration) => {
     const [minutes, seconds] = duration.split(':').map(Number);
-    console.log(minutes * 60 + seconds);
     return (minutes * 60) + seconds;
 };
 
@@ -22,19 +27,41 @@ export default function MusicPlayerBar({ song, isPlaying }) {
         }
     }, [audioRef, volume, song.duration]);
 
+
     useEffect(() => {
         let intervalId;
 
         if (isPlaying) {
             intervalId = setInterval(() => {
-                setCurrentTime(prevTime => prevTime + 1);
+                setCurrentTime(prevTime => {
+                    if (prevTime >= duration) {
+                        clearInterval(intervalId);
+                        if (audioRef.current) {
+                            audioRef.current.pause();
+                        }
+                        return 0;
+                    }
+                    return prevTime + 1;
+                });
             }, 1000);
         } else {
             clearInterval(intervalId);
         }
 
         return () => clearInterval(intervalId);
-    }, [isPlaying]);
+    }, [isPlaying, duration]);
+
+
+    useEffect(() => {
+        if (audioRef.current) {
+            // Reset the current time and play the song
+            setCurrentTime(0);
+            audioRef.current.currentTime = 0;
+            if (isPlaying) {
+                audioRef.current.play();
+            }
+        }
+    }, [song]);  // Listen to changes in the song prop
 
     useEffect(() => {
         if (audioRef.current) {
@@ -73,7 +100,7 @@ export default function MusicPlayerBar({ song, isPlaying }) {
                 <p>{song.artist}</p>
             </div>
             <div className="current-time">
-                {currentTime}s
+                {formatTime(currentTime)}s
             </div>
 
             <div className="controls">
