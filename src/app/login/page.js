@@ -52,56 +52,45 @@ function Page() {
     cursor: 'pointer',
   };
 
-  return (
-    <main>
-      {/* Título da página */}
-      <h1>Acesse a sua conta</h1>
-      <div>
-        {/* Formulário de login */}
-        <form style={formStyle}>
-          {/* Campo de email */}
-          <div className="form-group">
-            <label style={labelStyle} htmlFor="exampleInputEmail1">
-              Endereço de email
-            </label>
-            <input
-              style={inputStyle}
-              type="email"
-              id="exampleInputEmail1"
-              aria-describedby="emailHelp"
-              placeholder="Seu email"
-            />
-            <small id="emailHelp" className="form-text text-muted">
-              Nunca vamos compartilhar seu email com ninguém.
-            </small>
-          </div>
-          {/* Campo de senha */}
-          <div className="form-group">
-            <label style={labelStyle} htmlFor="exampleInputPassword1">
-              Senha
-            </label>
-            <input
-              style={inputStyle}
-              type="password"
-              id="exampleInputPassword1"
-              placeholder="Senha"
-            />
-          </div>
-          {/* Opção "Lembrar de mim" */}
-          <div className="form-group form-check">
-            <input type="checkbox" className="form-check-input" id="exampleCheck1" />
-            <label className="form-check-label" htmlFor="exampleCheck1">
-              Clique em mim
-            </label>
-          </div>
-          {/* Botão de envio */}
-          <button type="submit" style={buttonStyle}>
-            Enviar
-          </button>
-        </form>
-      </div>
-    </main>
-  );
+    return (
+        <main>
+            <h1>Acesse a sua conta</h1>
+            <div>
+                <form style={formStyle}>
+                    <div className="form-group">
+                        <label style={labelStyle} htmlFor="exampleInputEmail1">
+                            Endereço de email
+                        </label>
+                        <input
+                            style={inputStyle}
+                            type="email"
+                            id="exampleInputEmail1"
+                            aria-describedby="emailHelp"
+                            placeholder="Seu email"
+                        />
+                    </div>
+                    <div className="form-group">
+                        <label style={labelStyle} htmlFor="exampleInputPassword1">
+                            Senha
+                        </label>
+                        <input
+                            style={inputStyle}
+                            type="password"
+                            id="exampleInputPassword1"
+                            placeholder="Senha"
+                        />
+                    </div>
+                    <div className="form-group form-check">
+                        <input type="checkbox" className="form-check-input" id="exampleCheck1" />
+                        <label className="form-check-label" htmlFor="exampleCheck1">
+                            Manter minha conta conectada
+                        </label>
+                    </div>
+                    <button type="submit" style={buttonStyle}>
+                        Entrar
+                    </button>
+                </form>
+            </div>
+        </main>
+    );
 }
-
-export default Page;
