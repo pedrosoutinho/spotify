@@ -93,34 +93,44 @@ export default function MusicPlayerBar({ song, isPlaying }) {
     };
 
     return (
-        <div className="music-player-bar">
-            <div className="song-details">
-                <img src={song.albumCover} alt={`${song.title} cover`} width="50" height="50" />
-                <p>{song.title}</p>
-                <p>{song.artist}</p>
-            </div>
-            <div className="current-time">
-                {formatTime(currentTime)}s
-            </div>
+        <div className="fixed-bottom bg-dark p-2">
+            <div className="container-fluid">
+                <div className="row">
+                    <div className="col d-flex justify-content-start align-items-center">
+                        <img src={song.albumCover} alt={`${song.title} cover`} className="img-fluid" style={{ maxWidth: '90px' }} />
+                    </div>
 
-            <div className="controls">
-                <input
-                    type="range"
-                    min="0"
-                    max="100"
-                    step="1"
-                    value={volume * 100}
-                    onChange={handleVolumeChange}
-                />
-                <input
-                    type="range"
-                    min="0"
-                    max={duration}
-                    value={currentTime}
-                    onChange={handleTimeChange}
-                />
+                    <div className="col-8 d-flex flex-column justify-content-center">
+                        <div>
+                            <p className="mb-0 text-white">{song.title}</p>
+                            <p className="mb-0 text-white">{song.artist}</p>
+                        </div>
+                        <input
+                            className="custom-range mt-2 mb-1"
+                            type="range"
+                            min="0"
+                            max={duration}
+                            value={currentTime}
+                            onChange={handleTimeChange}
+                        />
+                        <p className="mb-0 text-center text-white">{formatTime(currentTime)} / {song.duration}</p>
+                    </div>
+
+                    <div className="col-2 d-flex align-items-center justify-content-end" >
+                        <input
+                            className="custom-range"
+                            type="range"
+                            min="0"
+                            max="100"
+                            step="1"
+                            value={volume * 100}
+                            onChange={handleVolumeChange}
+                        />
+                    </div>
+                </div>
             </div>
             <audio ref={audioRef} src={song.src} preload="metadata"></audio>
         </div>
     );
+
 }
