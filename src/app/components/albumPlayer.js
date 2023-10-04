@@ -9,7 +9,6 @@ export default function AlbumPlayer({ albumId }) {
 
     const album = albumjson.albumData[albumId - 1];
 
-
     const handlePlay = (song) => {
         if (currentSong && currentSong.src === song.src) {
             setIsPlaying(!isPlaying);
@@ -18,7 +17,6 @@ export default function AlbumPlayer({ albumId }) {
             setIsPlaying(true);
         }
     };
-
 
     if (!album) {
         return <div>Album not found</div>;
@@ -43,32 +41,35 @@ export default function AlbumPlayer({ albumId }) {
                             </tr>
                         </thead>
                         <tbody>
-                            {album.songs.map((song, index) => (
-                                <tr key={index}>
-                                    <td>{index + 1}</td>
-                                    <td>{song}</td>
-                                    <td>{album.durations[index]}</td>
-                                    <td>
-                                        <PlayPauseButton
-                                            song={{
-                                                title: song,
-                                                artist: album.artist,
-                                                albumCover: `/a${albumId}/cover.png`,
-                                                src: `/a${albumId}/${index + 1}.flac`,
-                                                duration: album.durations[index]
-                                            }}
-                                            onPlay={handlePlay}
-                                            currentPlayingSrc={currentSong ? currentSong.src : null}
-                                            isPlaying={isPlaying}
-                                        />
-                                    </td>
-                                </tr>
-                            ))}
+                            {album.songs.map((song) => {
+                                const songIndex = album.songs.indexOf(song);
+                                return (
+                                    <tr key={song}>
+                                        <td>{songIndex + 1}</td>
+                                        <td>{song}</td>
+                                        <td>{album.durations[songIndex]}</td>
+                                        <td>
+                                            <PlayPauseButton
+                                                song={{
+                                                    title: song,
+                                                    artist: album.artist,
+                                                    albumCover: `/a${albumId}/cover.png`,
+                                                    src: `/a${albumId}/${songIndex + 1}.flac`,
+                                                    duration: album.durations[songIndex]
+                                                }}
+                                                onPlay={handlePlay}
+                                                currentPlayingSrc={currentSong ? currentSong.src : null}
+                                                isPlaying={isPlaying}
+                                            />
+                                        </td>
+                                    </tr>
+                                );
+                            })}
                         </tbody>
                     </table>
                 </div>
             </div>
-            {currentSong && <MusicPlayerBar song={currentSong} isPlaying={isPlaying}/>}
+            {currentSong && <MusicPlayerBar song={currentSong} isPlaying={isPlaying} />}
         </div>
     );
 }

@@ -1,13 +1,12 @@
 import { useState, useEffect, useRef } from 'react';
 import { formatTime, convertDurationToSeconds } from '../utils/timeUtils';
 
-export default function MusicPlayerBar({ song, isPlaying}) {
+export default function MusicPlayerBar({ song, isPlaying }) {
     const [currentTime, setCurrentTime] = useState(0);
     const [volume, setVolume] = useState(1);
     const [duration, setDuration] = useState(0);
 
     const audioRef = useRef();
-
 
     useEffect(() => {
         if (audioRef.current) {
@@ -16,7 +15,6 @@ export default function MusicPlayerBar({ song, isPlaying}) {
             audioRef.current.volume = volume;
         }
     }, [audioRef, volume, song.duration]);
-
 
     useEffect(() => {
         let intervalId;
@@ -41,27 +39,17 @@ export default function MusicPlayerBar({ song, isPlaying}) {
         return () => clearInterval(intervalId);
     }, [isPlaying, duration]);
 
-
     useEffect(() => {
         if (audioRef.current) {
             setCurrentTime(0);
             audioRef.current.currentTime = 0;
             if (isPlaying) {
                 audioRef.current.play();
-            }
-        }
-    }, [song]);
-
-    useEffect(() => {
-        if (audioRef.current) {
-            if (isPlaying) {
-                audioRef.current.play();
             } else {
                 audioRef.current.pause();
             }
         }
-    }, [isPlaying]);
-
+    }, [song, isPlaying]);
 
     const handleVolumeChange = (e) => {
         const sliderValue = e.target.value;
