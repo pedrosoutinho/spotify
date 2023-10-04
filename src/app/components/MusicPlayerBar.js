@@ -1,17 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
+import { formatTime, convertDurationToSeconds } from '../utils/timeUtils';
 
-const formatTime = (seconds) => {
-    const mins = Math.floor(seconds / 60);
-    const secs = seconds % 60;
-    return `${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
-};
-
-const convertDurationToSeconds = (duration) => {
-    const [minutes, seconds] = duration.split(':').map(Number);
-    return (minutes * 60) + seconds;
-};
-
-export default function MusicPlayerBar({ song, isPlaying }) {
+export default function MusicPlayerBar({ song, isPlaying}) {
     const [currentTime, setCurrentTime] = useState(0);
     const [volume, setVolume] = useState(1);
     const [duration, setDuration] = useState(0);
@@ -54,14 +44,13 @@ export default function MusicPlayerBar({ song, isPlaying }) {
 
     useEffect(() => {
         if (audioRef.current) {
-            // Reset the current time and play the song
             setCurrentTime(0);
             audioRef.current.currentTime = 0;
             if (isPlaying) {
                 audioRef.current.play();
             }
         }
-    }, [song]);  // Listen to changes in the song prop
+    }, [song]);
 
     useEffect(() => {
         if (audioRef.current) {

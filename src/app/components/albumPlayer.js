@@ -25,7 +25,7 @@ export default function AlbumPlayer({ albumId }) {
     }
 
     return (
-        <div className="container">
+        <div className="container ">
             <div className="row">
                 <div className="col-md-4">
                     <img className="w-100 rounded mb-4" src={`/a${albumId}/cover.png`} alt={album.name} />
@@ -68,7 +68,7 @@ export default function AlbumPlayer({ albumId }) {
                     </table>
                 </div>
             </div>
-            {currentSong && <MusicPlayerBar song={currentSong} isPlaying={isPlaying} />}
+            {currentSong && <MusicPlayerBar song={currentSong} isPlaying={isPlaying}/>}
         </div>
     );
 }
