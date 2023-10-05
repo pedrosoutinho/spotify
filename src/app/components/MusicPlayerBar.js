@@ -1,15 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
-
-const formatTime = (seconds) => {
-    const mins = Math.floor(seconds / 60);
-    const secs = seconds % 60;
-    return `${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
-};
-
-const convertDurationToSeconds = (duration) => {
-    const [minutes, seconds] = duration.split(':').map(Number);
-    return (minutes * 60) + seconds;
-};
+import { formatTime, convertDurationToSeconds } from '../utils/timeUtils';
 
 export default function MusicPlayerBar({ song, isPlaying }) {
     const [currentTime, setCurrentTime] = useState(0);
@@ -17,7 +7,6 @@ export default function MusicPlayerBar({ song, isPlaying }) {
     const [duration, setDuration] = useState(0);
 
     const audioRef = useRef();
-
 
     useEffect(() => {
         if (audioRef.current) {
@@ -27,10 +16,8 @@ export default function MusicPlayerBar({ song, isPlaying }) {
         }
     }, [audioRef, volume, song.duration]);
 
-
     useEffect(() => {
         let intervalId;
-
         if (isPlaying) {
             intervalId = setInterval(() => {
                 setCurrentTime(prevTime => {
@@ -51,28 +38,17 @@ export default function MusicPlayerBar({ song, isPlaying }) {
         return () => clearInterval(intervalId);
     }, [isPlaying, duration]);
 
-
     useEffect(() => {
         if (audioRef.current) {
-            // Reset the current time and play the song
             setCurrentTime(0);
             audioRef.current.currentTime = 0;
-            if (isPlaying) {
-                audioRef.current.play();
-            }
-        }
-    }, [song]);  // Listen to changes in the song prop
-
-    useEffect(() => {
-        if (audioRef.current) {
             if (isPlaying) {
                 audioRef.current.play();
             } else {
                 audioRef.current.pause();
             }
         }
-    }, [isPlaying]);
-
+    }, [song, isPlaying]);
 
     const handleVolumeChange = (e) => {
         const sliderValue = e.target.value;
@@ -82,7 +58,6 @@ export default function MusicPlayerBar({ song, isPlaying }) {
             audioRef.current.volume = newVolume;
         }
     };
-
 
     const handleTimeChange = (e) => {
         const newTime = Number(e.target.value);
