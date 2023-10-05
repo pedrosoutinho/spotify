@@ -1,4 +1,4 @@
-import albumjson from 'data/albumData.json';
+import albumjson from '../data/albumData.json';
 import Link from "next/link";
 
 export default function AlbumGrid() {

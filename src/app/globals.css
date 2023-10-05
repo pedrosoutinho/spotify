@@ -34,6 +34,7 @@ main{
  background: linear-gradient(180deg, #ffcc00 5%, rgba(0,0,0,1) 95%);
  color: white;
 }
+
 header{
     display: flex;
     width: 100vw;
@@ -41,6 +42,7 @@ header{
     background-color: black;
     border-bottom: 1px solid rgb(41, 41, 41);
 }
+
 nav{
     display: flex;
     width: 100%;
@@ -49,6 +51,7 @@ nav{
     align-items: center;
     justify-content: flex-end;
 }
+
 nav ul{
     justify-content: flex-end;
     list-style-type: none;
@@ -60,7 +63,9 @@ nav ul{
 nav li{
     width: 50%;
     align-items: center;
-    margin: 15px;
+    display: flex;
+    justify-content: center;
+    margin: 0 15px;
 }
 nav li a{
     text-decoration: none;
@@ -104,6 +109,7 @@ footer{
     position: fixed;
     bottom: 0;
     width: 100vw;
+    height: 5%;
     background-color: #333;
     color: white;
     text-align: center;
@@ -201,4 +207,39 @@ button {
 /* button:hover { */
 /*   background-color: #1aa44b; */
 /* } */
+
+.custom-navbar {
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+.custom-navbar .navbar-nav {
+    justify-content: flex-end;
+    list-style-type: none;
+    display: flex;
+    width: 20%;
+    flex-direction: row;
+    margin-right: 20px;
+}
+
+.custom-navbar .nav-item {
+    width: 50%;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    margin: 0 15px;
+}
+
+.custom-navbar .nav-link {
+    text-decoration: none;
+    color: white;
+}
+
+.custom-navbar .nav-link:hover {
+    transition: 200ms ease-in-out;
+    color: rgb(245,255,0);
+    cursor: pointer;
+}
 
