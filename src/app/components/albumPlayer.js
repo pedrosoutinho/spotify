@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import albumjson from 'data/albumData.json';
+import albumjson from '../data/albumData.json';
 import PlayPauseButton from './PlayPauseButton';
 import MusicPlayerBar from './MusicPlayerBar';
 

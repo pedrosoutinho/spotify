@@ -18,7 +18,6 @@ export default function MusicPlayerBar({ song, isPlaying }) {
 
     useEffect(() => {
         let intervalId;
-
         if (isPlaying) {
             intervalId = setInterval(() => {
                 setCurrentTime(prevTime => {
@@ -59,7 +58,6 @@ export default function MusicPlayerBar({ song, isPlaying }) {
             audioRef.current.volume = newVolume;
         }
     };
-
 
     const handleTimeChange = (e) => {
         const newTime = Number(e.target.value);
