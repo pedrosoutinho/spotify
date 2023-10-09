@@ -241,5 +241,62 @@ button {
     transition: 200ms ease-in-out;
     color: rgb(245,255,0);
     cursor: pointer;
+    
 }
+
+/* css login */
+
+.form {
+  /* Define a largura máxima do formulário */
+  max-width: 400px;
+  /* Centraliza o formulário horizontalmente na página */
+  margin: 0 auto;
+  /* Adiciona um espaçamento interno ao redor do formulário */
+  padding: 20px;
+  /* Adiciona uma borda ao redor do formulário */
+  border: 1px solid #ccc;
+  /* Arredonda as bordas do formulário */
+  border-radius: 5px;
+  /* Adiciona uma sombra suave ao redor do formulário */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.label {
+  /* Define o rótulo como um bloco, para que ele ocupe toda a largura disponível */
+  display: block;
+  /* Adiciona um espaçamento inferior para separar os rótulos dos campos de entrada */
+  margin-bottom: 8px;
+}
+
+.input {
+  /* Define a largura do campo de entrada como 100% da largura do pai */
+  width: 100%;
+  /* Adiciona preenchimento interno ao campo de entrada */
+  padding: 10px;
+  /* Adiciona um espaçamento inferior para separar os campos de entrada */
+  margin-bottom: 20px;
+  /* Arredonda as bordas do campo de entrada */
+  border-radius: 5px;
+  /* Adiciona uma borda ao redor do campo de entrada */
+  border: 1px solid #ccc;
+}
+
+/* page.module.css */
+
+.button {
+  /* Define a cor de fundo do botão */
+  background-color: #007BFF;
+  /* Define a cor do texto do botão como branco */
+  color: #fff;
+  /* Remove a borda do botão */
+  border: none;
+  /* Arredonda as bordas do botão */
+  border-radius: 5px;
+  /* Adiciona preenchimento interno ao botão */
+  padding: 10px 20px;
+  /* Define o cursor como "pointer" para indicar que é clicável */
+  cursor: pointer;
+}
+
+
 
