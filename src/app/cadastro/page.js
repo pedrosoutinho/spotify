@@ -1,100 +1,97 @@
+'use client'
+import { useState } from 'react';
+import styles from './page.module.css';
+
 export default function Page() {
-    const cadastroStyle = {
-        textAlign: 'center',
-        marginTop: '-45px',
-        boxShadow: '0px 0px 4px 5px rgba(0, 0, 0, 0.15)',
-        padding: '14px',
-        borderRadius: '7px',
+    const [name, setName] = useState('');
+    const [email, setEmail] = useState('');
+    const [emailConfirmation, setEmailConfirmation] = useState('');
+    const [password, setPassword] = useState('');
+    const [message, setMessage] = useState('');
+    const [showPopup, setShowPopup] = useState(false);
 
-    }
-    const logoStyleCadastro = {
-        width: '70px',
-        background: 'rgba(0, 0, 0, 0.4)',
-        boxShadow: '0 4px 3px rgba(0, 0, 0, 0.3)',
+    const handleSubmit = (e) => {
+        e.preventDefault();
 
-    }
-    const formStyle = {
-        textAlign: 'start',
-        maxWidth: '350px',
-        padding: '10px',
-        borderRadius: '6px',
-        boxShadow: '0px 0px 5px 2px rgba(0, 0, 0, 0.1)',
+        if (email !== emailConfirmation) {
+            setMessage('Os e-mails não coincidem.');
+            setShowPopup(true);
+            document.getElementById('emailConfirmation').focus();
+            return;
+        }
+
+        setName('');
+        setEmail('');
+        setEmailConfirmation('');
+        setPassword('');
+        setMessage('Registro realizado com sucesso!');
+        setShowPopup(true);
     };
-    const inputStyle = {
-        width: '100%',
-        padding: '8px',
-        marginBottom: '12px',
-        borderRadius: '5px',
-        border: '1px solid #ccc',
-    };
-    const botao = {
-        display: 'block',
-        margin: '4px auto 3px auto',
-        padding: '10px 28px',
-        color: 'rgba(0, 0, 0, 0.7)',
-        background: '#ffcc00',
-        border: 'rgba(0, 0, 0, 0.5) 1px solid',
-        boxShadow: '-2px 3px 1px 1px rgba(0, 0, 0, 0.3)',
-        borderRadius: '8px',
-        fontSize: '14.5px',
-        fontWeight: 'bold'
-    }
+
     return (
         <main>
-            <div style={cadastroStyle}>
+            <div className={styles.cadastroStyle}>
                 <div>
-                    <img className="logo-icon" src="/spotify amarelo.png" alt="" style={logoStyleCadastro} />
+                    <img src="/spotify amarelo.png" alt="" className={styles.logoStyleCadastro} />
                 </div>
                 <h1>Registre-se</h1>
-                <div >
-
-                    <form style={formStyle}>
+                <div>
+                    <form onSubmit={handleSubmit} className={styles.formStyle}>
                         <div className="form-group">
-                            <label htmlFor="exampleInputEmail1">Nome:</label>
-                            <br />
                             <input
-                                style={inputStyle}
+                                value={name}
+                                onChange={(e) => setName(e.target.value)}
+                                className={styles.inputStyle}
+                                type="text"
+                                placeholder="Como devemos te chamar?"
+                            />
+                        </div>
+                        <div className="form-group">
+                            <input
+                                value={email}
+                                onChange={(e) => setEmail(e.target.value)}
+                                className={styles.inputStyle}
                                 type="email"
-                                placeholder="Ex: Vinicius Lopes"
+                                placeholder="E-mail"
                             />
                         </div>
                         <div className="form-group">
-                            <label htmlFor="exampleInputEmail1">Endereço de e-mail:</label>
-                            <br />
                             <input
-                                style={inputStyle}
+                                id="emailConfirmation"
+                                value={emailConfirmation}
+                                onChange={(e) => setEmailConfirmation(e.target.value)}
+                                className={styles.inputStyle}
                                 type="email"
-                                placeholder="Ex: unifor@gmail.com"
+                                placeholder="Confirme o e-mail"
                             />
                         </div>
                         <div className="form-group">
-                            <label htmlFor="exampleInputPassword1">Senha:</label>
-                            <br />
                             <input
-                                style={inputStyle}
+                                value={password}
+                                onChange={(e) => setPassword(e.target.value)}
+                                className={styles.inputStyle}
                                 type="password"
-                                id="password"
-                                name="password"
-                                placeholder="Ex: senha123"
+                                placeholder="Senha"
                             />
                         </div>
-
-                        <div className="form-group">
-                            <label htmlFor="exampleInputEmail1">Repita a senha:</label>
-                            <input
-                                style={inputStyle}
-                                type="password"
-                                id="password"
-                                name="password"
-                                placeholder="Repita a sua senha"
-                            />
-                        </div>
-                        <button type="submit" style={botao}>
+                        <button type="submit" className={styles.botao}>
                             Finalizar
                         </button>
                     </form>
                 </div>
             </div>
+            {showPopup && (
+                <div className={styles.popupOverlay}>
+                    <div className={styles.popupContent}>
+                        <span className={styles.closeBtn} onClick={() => setShowPopup(false)}>
+                            &times;
+                        </span>
+                        <p>{message}</p>
+                    </div>
+                </div>
+            )}
         </main>
     );
 }
+
+

@@ -3,7 +3,7 @@ import { formatTime, convertDurationToSeconds } from '../utils/timeUtils';
 
 export default function MusicPlayerBar({ song, isPlaying }) {
     const [currentTime, setCurrentTime] = useState(0);
-    const [volume, setVolume] = useState(1);
+    const [volume, setVolume] = useState(0.5);
     const [duration, setDuration] = useState(0);
 
     const audioRef = useRef();
