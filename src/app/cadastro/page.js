@@ -20,6 +20,12 @@ export default function Page() {
             return;
         }
 
+        if (name === '' || email === '' || password === '') {
+            setMessage('Preencha todos os campos.');
+            setShowPopup(true);
+            return;
+        }
+
         setName('');
         setEmail('');
         setEmailConfirmation('');
