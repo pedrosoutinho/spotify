@@ -1,28 +1,33 @@
 'use client'
 import { useState } from 'react';
 import styles from './page.module.css';
+import Swal from 'sweetalert2';
 
 export default function Page() {
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [emailConfirmation, setEmailConfirmation] = useState('');
     const [password, setPassword] = useState('');
-    const [message, setMessage] = useState('');
-    const [showPopup, setShowPopup] = useState(false);
 
     const handleSubmit = (e) => {
         e.preventDefault();
 
         if (email !== emailConfirmation) {
-            setMessage('Os e-mails não coincidem.');
-            setShowPopup(true);
+            Swal.fire({
+                icon: 'error',
+                title: 'Erro!',
+                text: 'Os e-mails não coincidem.',
+            });
             document.getElementById('emailConfirmation').focus();
             return;
         }
 
-        if (name === '' || email === '' || password === '') {
-            setMessage('Preencha todos os campos.');
-            setShowPopup(true);
+        if (name === '' || email === '' || emailConfirmation === '' || password === '') {
+            Swal.fire({
+                icon: 'error',
+                title: 'Erro!',
+                text: 'Preencha todos os campos.',
+            });
             return;
         }
 
@@ -30,8 +35,13 @@ export default function Page() {
         setEmail('');
         setEmailConfirmation('');
         setPassword('');
-        setMessage('Registro realizado com sucesso!');
-        setShowPopup(true);
+        Swal.fire({
+            icon: 'success',
+            title: 'Cadastro realizado com sucesso!',
+            title: 'Seja bem-vindo(a)!',
+            showConfirmButton: false,
+            timer: 2000
+        });
     };
 
     return (
@@ -86,16 +96,6 @@ export default function Page() {
                     </form>
                 </div>
             </div>
-            {showPopup && (
-                <div className={styles.popupOverlay}>
-                    <div className={styles.popupContent}>
-                        <span className={styles.closeBtn} onClick={() => setShowPopup(false)}>
-                            &times;
-                        </span>
-                        <p>{message}</p>
-                    </div>
-                </div>
-            )}
         </main>
     );
 }
