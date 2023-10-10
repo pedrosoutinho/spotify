@@ -8,6 +8,7 @@ export default function Page() {
     const [email, setEmail] = useState('');
     const [emailConfirmation, setEmailConfirmation] = useState('');
     const [password, setPassword] = useState('');
+    const [passwordConfirmation, setPasswordConfirmation] = useState('');
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -19,6 +20,16 @@ export default function Page() {
                 text: 'Os e-mails não coincidem.',
             });
             document.getElementById('emailConfirmation').focus();
+            return;
+        }
+
+        if (password !== passwordConfirmation){
+            Swal.fire({
+                icon: 'error',
+                title: 'Erro!',
+                text: 'As senhas não coincidem.',
+            });
+            document.getElementById('passwordConfirmation').focus();
             return;
         }
 
@@ -35,6 +46,7 @@ export default function Page() {
         setEmail('');
         setEmailConfirmation('');
         setPassword('');
+        setPasswordConfirmation('');
         Swal.fire({
             icon: 'success',
             title: 'Cadastro realizado com sucesso!',
@@ -53,7 +65,7 @@ export default function Page() {
                 <h1>Registre-se</h1>
                 <div>
                     <form onSubmit={handleSubmit} className={styles.formStyle}>
-                        <div className="form-group">
+                        <div>
                             <input
                                 value={name}
                                 onChange={(e) => setName(e.target.value)}
@@ -62,7 +74,7 @@ export default function Page() {
                                 placeholder="Como devemos te chamar?"
                             />
                         </div>
-                        <div className="form-group">
+                        <div>
                             <input
                                 value={email}
                                 onChange={(e) => setEmail(e.target.value)}
@@ -71,23 +83,33 @@ export default function Page() {
                                 placeholder="E-mail"
                             />
                         </div>
-                        <div className="form-group">
+                        <div>
                             <input
                                 id="emailConfirmation"
                                 value={emailConfirmation}
                                 onChange={(e) => setEmailConfirmation(e.target.value)}
                                 className={styles.inputStyle}
                                 type="email"
-                                placeholder="Confirme o e-mail"
+                                placeholder="Confirme o seu e-mail"
                             />
                         </div>
-                        <div className="form-group">
+                        <div>
                             <input
                                 value={password}
                                 onChange={(e) => setPassword(e.target.value)}
                                 className={styles.inputStyle}
                                 type="password"
                                 placeholder="Senha"
+                            />
+                        </div>
+                        <div  >
+                            <input
+                                id="passwordConfirmation"
+                                value={passwordConfirmation}
+                                onChange={(e) => setPasswordConfirmation(e.target.value)}
+                                className={styles.inputStyle}
+                                type="password"
+                                placeholder="Confirme sua senha"
                             />
                         </div>
                         <button type="submit" className={styles.botao}>
