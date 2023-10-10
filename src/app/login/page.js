@@ -2,20 +2,22 @@
 import React, { useState } from 'react';
 import Swal from 'sweetalert2'
 import withReactContent from 'sweetalert2-react-content'
+import styles from './page.module.css'
 
 function Page() {
   // Definir estados para email e senha
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const MySwal = withReactContent(Swal)
+
   // Função para lidar com o envio do formulário
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(email,password)
+    console.log(email, password)
 
     // Validar os campos (adicionar suas próprias regras de validação)
     if (email === '' || password === '') {
-      Swal.fire({
+      MySwal.fire({
         title: 'Erro!',
         text: 'Digite seu Login e Senha',
         icon: 'error',
@@ -23,8 +25,8 @@ function Page() {
       })
       return;
     }
-    Swal.fire({
-      
+    MySwal.fire({
+
       icon: 'success',
       title: 'Usuário logado com sucesso',
       showConfirmButton: false,
@@ -40,13 +42,13 @@ function Page() {
     <main>
       <h1>Acesse a sua conta</h1>
       <div>
-        <form className="form" onSubmit={handleSubmit}>
-          <div className="form-group">
-            <label className="label" htmlFor="exampleInputEmail1">
+        <form className={styles.formStyle} onSubmit={handleSubmit}>
+          <div className={styles.formGroup}>
+            <label className={styles.labelStyle} htmlFor="exampleInputEmail1">
               Endereço de email
             </label>
             <input
-              className="input"
+              className={styles.inputStyle}
               type="email"
               id="exampleInputEmail1"
               aria-describedby="emailHelp"
@@ -55,12 +57,12 @@ function Page() {
               onChange={(e) => setEmail(e.target.value)} // Atualiza o estado quando o campo muda
             />
           </div>
-          <div className="form-group">
-            <label className="label" htmlFor="exampleInputPassword1">
+          <div className={styles.formGroup}>
+            <label className={styles.labelStyle} htmlFor="exampleInputPassword1">
               Senha
             </label>
             <input
-              className="input"
+              className={styles.inputStyle}
               type="password"
               id="exampleInputPassword1"
               placeholder="Senha"
@@ -68,13 +70,13 @@ function Page() {
               onChange={(e) => setPassword(e.target.value)} // Atualiza o estado quando o campo muda
             />
           </div>
-          <div className="form-group form-check">
-            <input type="checkbox" className="form-check-input" id="exampleCheck1" />
-            <label className="form-check-label" htmlFor="exampleCheck1">
+          <div className={styles.formGroup + ' ' + styles.formCheck}>
+            <input type="checkbox" className={styles.formCheckInput} id="exampleCheck1" />
+            <label className={styles.formCheckLabel} htmlFor="exampleCheck1">
               Manter minha conta conectada
             </label>
           </div>
-          <button type="submit" className="button">
+          <button type="submit" className={styles.buttonStyle}>
             Entrar
           </button>
         </form>
