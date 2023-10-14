@@ -1,13 +1,27 @@
-import { useState } from 'react';
-import albumjson from '../data/albumData.json';
+import { useEffect, useState } from 'react';
 import PlayPauseButton from './PlayPauseButton';
 import MusicPlayerBar from './MusicPlayerBar';
+import {fetchAlbum} from "../services/api";
 
 export default function AlbumPlayer({ albumId }) {
     const [currentSong, setCurrentSong] = useState(null);
     const [isPlaying, setIsPlaying] = useState(false);
+    const [album, setAlbum] = useState(null);
+    const [loading, setLoading] = useState(true);
 
-    const album = albumjson.albumData[albumId - 1];
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const albumData = await fetchAlbum(albumId); // Use the new fetchAlbum function
+                setAlbum(albumData);
+                setLoading(false);
+            } catch (error) {
+                console.error("Failed to fetch album data:", error);
+            }
+        };
+
+        fetchData();
+    }, [albumId]);
 
     const handlePlay = (song) => {
         if (currentSong && currentSong.src === song.src) {
@@ -17,6 +31,10 @@ export default function AlbumPlayer({ albumId }) {
             setIsPlaying(true);
         }
     };
+
+    if (loading) {
+        return <div>Loading...</div>;
+    }
 
     if (!album) {
         return <div>Album not found</div>;

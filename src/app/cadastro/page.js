@@ -2,6 +2,7 @@
 import { useState } from 'react';
 import styles from './page.module.css';
 import Swal from 'sweetalert2';
+import { registerUser } from '../services/api';
 
 export default function Page() {
     const [name, setName] = useState('');
@@ -10,7 +11,7 @@ export default function Page() {
     const [password, setPassword] = useState('');
     const [passwordConfirmation, setPasswordConfirmation] = useState('');
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
 
         if (email !== emailConfirmation) {
@@ -23,7 +24,7 @@ export default function Page() {
             return;
         }
 
-        if (password !== passwordConfirmation){
+        if (password !== passwordConfirmation) {
             Swal.fire({
                 icon: 'error',
                 title: 'Erro!',
@@ -42,18 +43,27 @@ export default function Page() {
             return;
         }
 
-        setName('');
-        setEmail('');
-        setEmailConfirmation('');
-        setPassword('');
-        setPasswordConfirmation('');
-        Swal.fire({
-            icon: 'success',
-            title: 'Cadastro realizado com sucesso!',
-            title: 'Seja bem-vindo(a)!',
-            showConfirmButton: false,
-            timer: 2000
-        });
+        try {
+            await registerUser({ name, email, password });
+            setName('');
+            setEmail('');
+            setEmailConfirmation('');
+            setPassword('');
+            setPasswordConfirmation('');
+            Swal.fire({
+                icon: 'success',
+                title: 'Cadastro realizado com sucesso!',
+                text: 'Seja bem-vindo(a)!',
+                showConfirmButton: false,
+                timer: 2000
+            });
+        } catch (error) {
+            Swal.fire({
+                icon: 'error',
+                title: 'Erro!',
+                text: 'Houve um problema ao realizar o cadastro. Tente novamente.',
+            });
+        }
     };
 
     return (
