@@ -1,4 +1,4 @@
-'use client'
+'use client';
 import Link from 'next/link';
 import { useContext } from 'react';
 import UserContext from './userContext';
@@ -16,13 +16,13 @@ export default function Navbar() {
                     <div className="collapse navbar-collapse">
                         <ul className="navbar-nav me-auto">
                             <li className="nav-item">
-                                <Link href="/playlists">
-                                    <div className="nav-link">Playlists</div>
+                                <Link href="/playlists" className="nav-link">
+                                    Playlists
                                 </Link>
                             </li>
                             <li className="nav-item">
-                                <Link href="/suporte">
-                                    <div className="nav-link">Suporte</div>
+                                <Link href="/suporte" className="nav-link">
+                                    Suporte
                                 </Link>
                             </li>
                         </ul>
@@ -30,25 +30,37 @@ export default function Navbar() {
                         <ul className="navbar-nav">
                             {isLoggedIn ? (
                                 <>
-                                    <li className="nav-item">
-                                        <Link href="/myaccount">
-                                            <div className="nav-link">My Account</div>
-                                        </Link>
+                                    <li className="nav-item dropdown">
+                                        <div className="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                            My Account
+                                        </div>
+                                        <ul className="dropdown-menu" aria-labelledby="navbarDropdown">
+                                            <li>
+                                                <Link href="/myplaylists" className="dropdown-item">
+                                                    My Playlists
+                                                </Link>
+                                            </li>
+                                            <li>
+                                                <Link href="/edit-profile" className="dropdown-item">
+                                                    Edit Profile
+                                                </Link>
+                                            </li>
+                                        </ul>
                                     </li>
                                     <li className="nav-item">
-                                        <div className="nav-link" onClick={logout}>Logout</div>
+                                        <div className="nav-link" style={{cursor: 'pointer'}} onClick={logout}>Logout</div>
                                     </li>
                                 </>
                             ) : (
                                 <>
                                     <li className="nav-item">
-                                        <Link href="/login">
-                                            <div className="nav-link">Login</div>
+                                        <Link href="/login" className="nav-link">
+                                            Login
                                         </Link>
                                     </li>
                                     <li className="nav-item">
-                                        <Link href="/cadastro">
-                                            <div className="nav-link">Registre-se</div>
+                                        <Link href="/cadastro" className="nav-link">
+                                            Registre-se
                                         </Link>
                                     </li>
                                 </>

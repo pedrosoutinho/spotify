@@ -17,6 +17,15 @@ export const loginUser = async (credentials) => {
     }
 };
 
+export const doesEmailExist = async (email) => {
+    try {
+        const response = await axios.get(`${API_URL}/users?email=${email}`);
+        return response.data.length > 0;
+    } catch (error) {
+        throw error;
+    }
+};
+
 export const registerUser = async (user) => {
     try{
         const response = await axios.post(`${API_URL}/users`, user);
@@ -26,18 +35,27 @@ export const registerUser = async (user) => {
     }
 };
 
-export const fetchAlbums = async () => {
+export const fetchPlaylists = async () => {
     try {
-        const response = await axios.get(`${API_URL}/albumData`);
+        const response = await axios.get(`${API_URL}/playlists`);
         return response.data;
     } catch (error) {
         throw error;
     }
 };
 
-export const fetchAlbum = async (albumId) => {
+export const fetchPlaylist = async (playlistId) => {
     try {
-        const response = await axios.get(`${API_URL}/albumData/${albumId}`);
+        const response = await axios.get(`${API_URL}/playlists/${playlistId}`);
+        return response.data;
+    } catch (error) {
+        throw error;
+    }
+};
+
+export const fetchSongs = async () => {
+    try {
+        const response = await axios.get(`${API_URL}/songs`);
         return response.data;
     } catch (error) {
         throw error;

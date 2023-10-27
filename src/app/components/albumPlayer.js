@@ -1,27 +1,33 @@
 import { useEffect, useState } from 'react';
 import PlayPauseButton from './PlayPauseButton';
 import MusicPlayerBar from './MusicPlayerBar';
-import {fetchAlbum} from "../services/api";
+import { fetchPlaylist, fetchSongs } from "../services/api";
+
 
 export default function AlbumPlayer({ albumId }) {
     const [currentSong, setCurrentSong] = useState(null);
     const [isPlaying, setIsPlaying] = useState(false);
-    const [album, setAlbum] = useState(null);
+    const [playlist, setPlaylist] = useState(null);
+    const [songs, setSongs] = useState([]);
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const albumData = await fetchAlbum(albumId); // Use the new fetchAlbum function
-                setAlbum(albumData);
+                const playlistData = await fetchPlaylist(albumId);
+                const allSongs = await fetchSongs();
+                const relevantSongs = allSongs.filter(song => playlistData.songs.includes(song.id));
+                setPlaylist(playlistData);
+                setSongs(relevantSongs);
                 setLoading(false);
             } catch (error) {
-                console.error("Failed to fetch album data:", error);
+                console.error("Failed to fetch data:", error);
             }
         };
 
         fetchData();
     }, [albumId]);
+
 
     const handlePlay = (song) => {
         if (currentSong && currentSong.src === song.src) {
@@ -36,17 +42,17 @@ export default function AlbumPlayer({ albumId }) {
         return <div>Loading...</div>;
     }
 
-    if (!album) {
-        return <div>Album not found</div>;
+    if (!playlist) {
+        return <div>Playlist not found</div>;
     }
 
     return (
         <div className="container ">
             <div className="row">
                 <div className="col-md-4">
-                    <img className="w-100 rounded mb-4" src={`/a${albumId}/cover.png`} alt={album.name} />
-                    <h2 className="text-2xl font-bold">{album.name}</h2>
-                    <p>{album.artist}</p>
+                    <img className="w-100 rounded mb-4" src={`/a${albumId}/cover.png`} alt={playlist.name} />
+                    <h2 className="text-2xl font-bold">{playlist.name}</h2>
+                    <p>{playlist.artist}</p>
                 </div>
                 <div className="col-md-8" style={{ height: '600px', overflow: 'scroll' }}>
                     <table className="table table-bordered">
@@ -59,30 +65,27 @@ export default function AlbumPlayer({ albumId }) {
                             </tr>
                         </thead>
                         <tbody>
-                            {album.songs.map((song) => {
-                                const songIndex = album.songs.indexOf(song);
-                                return (
-                                    <tr key={song}>
-                                        <td>{songIndex + 1}</td>
-                                        <td>{song}</td>
-                                        <td>{album.durations[songIndex]}</td>
-                                        <td>
-                                            <PlayPauseButton
-                                                song={{
-                                                    title: song,
-                                                    artist: album.artist,
-                                                    albumCover: `/a${albumId}/cover.png`,
-                                                    src: `/a${albumId}/${songIndex + 1}.flac`,
-                                                    duration: album.durations[songIndex]
-                                                }}
-                                                onPlay={handlePlay}
-                                                currentPlayingSrc={currentSong ? currentSong.src : null}
-                                                isPlaying={isPlaying}
-                                            />
-                                        </td>
-                                    </tr>
-                                );
-                            })}
+                            {songs.map((song, index) => (
+                                <tr key={song.id}>
+                                    <td>{index + 1}</td>
+                                    <td>{song.title}</td>
+                                    <td>{song.duration}</td>
+                                    <td>
+                                        <PlayPauseButton
+                                            song={{
+                                                title: song.title,
+                                                artist: song.artist,
+                                                albumCover: `/a${albumId}/cover.png`,
+                                                src: `/a${albumId}/${index + 1}.flac`,
+                                                duration: song.duration
+                                            }}
+                                            onPlay={handlePlay}
+                                            currentPlayingSrc={currentSong ? currentSong.src : null}
+                                            isPlaying={isPlaying}
+                                        />
+                                    </td>
+                                </tr>
+                            ))}
                         </tbody>
                     </table>
                 </div>
