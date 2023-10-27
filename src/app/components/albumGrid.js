@@ -1,7 +1,7 @@
 'use client'
 import { useState, useEffect } from 'react';
 import Link from "next/link";
-import { fetchAlbums } from "../services/api";
+import { fetchPlaylists } from "../services/api";
 
 export default function AlbumGrid() {
     const [albums, setAlbums] = useState([]);
@@ -10,7 +10,7 @@ export default function AlbumGrid() {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const albumData = await fetchAlbums();
+                const albumData = await fetchPlaylists();
                 setAlbums(albumData);
                 setLoading(false);
             } catch (error) {

@@ -2,7 +2,7 @@
 import { useState } from 'react';
 import styles from './page.module.css';
 import Swal from 'sweetalert2';
-import { registerUser } from '../services/api';
+import { doesEmailExist, registerUser } from '../services/api';
 
 export default function Page() {
     const [name, setName] = useState('');
@@ -44,6 +44,16 @@ export default function Page() {
         }
 
         try {
+            const emailExists = await doesEmailExist(email);
+            if (emailExists) {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Erro!',
+                    text: 'Este e-mail já está em uso.',
+                });
+                return;
+            }
+
             await registerUser({ name, email, password });
             setName('');
             setEmail('');
@@ -58,6 +68,7 @@ export default function Page() {
                 timer: 2000
             });
         } catch (error) {
+            console.log(error);
             Swal.fire({
                 icon: 'error',
                 title: 'Erro!',
