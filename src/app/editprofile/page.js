@@ -1,4 +1,3 @@
-// EditProfile.js
 'use client'
 import { useState, useEffect, useContext } from 'react';
 import styles from './page.module.css';
@@ -118,6 +117,5 @@ export default function EditProfile() {
                 </div>
             </div>
         </main>
-
     );
 }
