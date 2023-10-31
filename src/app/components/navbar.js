@@ -1,6 +1,6 @@
 'use client';
 import Link from 'next/link';
-import { useContext, useState } from 'react';
+import { useContext } from 'react';
 import UserContext from './userContext';
 import SearchBar from './searchBar.js'
 
@@ -30,10 +30,10 @@ export default function Navbar() {
                         <div className="barra mx-3">|</div>
                         <ul className="navbar-nav">
                             {isLoggedIn ? (
-                                <>  
-                                     <li className='custom-input-searchbar'>
-                                        <SearchBar/>
-                                     </li>
+                                <>
+                                    <li className='custom-input-searchbar'>
+                                        <SearchBar />
+                                    </li>
                                     <li className="nav-item dropdown">
                                         <div className="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                             My Account
@@ -52,7 +52,7 @@ export default function Navbar() {
                                         </ul>
                                     </li>
                                     <li className="nav-item">
-                                        <div className="nav-link" style={{cursor: 'pointer'}} onClick={logout}>Logout</div>
+                                        <div className="nav-link" style={{ cursor: 'pointer' }} onClick={logout}>Logout</div>
                                     </li>
                                 </>
                             ) : (

@@ -9,7 +9,9 @@ import UserContext from '../components/userContext';
 export default function UserPlaylists() {
     const [playlistName, setPlaylistName] = useState('');
     const [playlists, setPlaylists] = useState([]);
-    const { user } = useContext(UserContext);
+    const { user, updateUserContext } = useContext(UserContext);
+
+    console.log('user', user);
 
     useEffect(() => {
         if (user && user.playlists) {
@@ -36,6 +38,7 @@ export default function UserPlaylists() {
                 };
 
                 await updateUser(updatedUser);
+                updateUserContext(updatedUser);
                 setPlaylists(updatedUser.playlists);
             }
             setPlaylistName('');
@@ -54,6 +57,7 @@ export default function UserPlaylists() {
                 playlists: updatedPlaylists
             };
             await updateUser(updatedUser);
+            updateUserContext(updatedUser);
         } catch (error) {
             console.error('Error deleting playlist:', error);
         }

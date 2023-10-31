@@ -182,6 +182,12 @@
         119
       ],
       "creator": "public"
+    },
+    {
+      "name": "oii",
+      "songs": [],
+      "creator": 2,
+      "id": 10
     }
   ],
   "users": [
@@ -195,6 +201,7 @@
       "name": "a",
       "email": "a@a.com",
       "password": "123",
+      "playlists": [],
       "id": 2
     },
     {
