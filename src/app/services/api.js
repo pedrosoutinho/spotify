@@ -61,3 +61,25 @@ export const fetchSongs = async () => {
         throw error;
     }
 };
+
+//updateUser do api.js
+
+export const updateUser = async (user) => {
+    try {
+        const { id, ...userData } = user;
+        const storedUser = JSON.parse(localStorage.getItem('user'));
+
+        if (storedUser && storedUser.id === id) {
+            const response = await axios.put(`${API_URL}/users/${id}`, userData);
+            const updatedUser = response.data;
+
+            localStorage.setItem('user', JSON.stringify(updatedUser));
+
+            return updatedUser;
+        } else {
+            throw new Error('User not found in local storage');
+        }
+    } catch (error) {
+        throw error;
+    }
+};

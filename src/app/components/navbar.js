@@ -45,7 +45,7 @@ export default function Navbar() {
                                                 </Link>
                                             </li>
                                             <li>
-                                                <Link href="/edit-profile" className="dropdown-item">
+                                                <Link href="/editprofile" className="dropdown-item">
                                                     Edit Profile
                                                 </Link>
                                             </li>

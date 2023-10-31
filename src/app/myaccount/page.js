@@ -29,7 +29,7 @@ export default function MyAccountPage() {
                     </Link>
                 </li>
                 <li>
-                    <Link href="/edit-profile">
+                    <Link href="/editprofile">
                         <div className={styles.option}>Edit Profile</div>
                     </Link>
                 </li>
