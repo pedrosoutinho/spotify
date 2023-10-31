@@ -1,7 +1,8 @@
 'use client';
 import Link from 'next/link';
-import { useContext } from 'react';
+import { useContext, useState } from 'react';
 import UserContext from './userContext';
+import SearchBar from './searchBar.js'
 
 export default function Navbar() {
     const { isLoggedIn, logout } = useContext(UserContext);
@@ -29,7 +30,10 @@ export default function Navbar() {
                         <div className="barra mx-3">|</div>
                         <ul className="navbar-nav">
                             {isLoggedIn ? (
-                                <>
+                                <>  
+                                     <li className='custom-input-searchbar'>
+                                        <SearchBar/>
+                                     </li>
                                     <li className="nav-item dropdown">
                                         <div className="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                             My Account
