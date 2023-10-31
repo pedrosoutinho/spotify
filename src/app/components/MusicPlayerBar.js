@@ -40,15 +40,23 @@ export default function MusicPlayerBar({ song, isPlaying }) {
 
     useEffect(() => {
         if (audioRef.current) {
-            setCurrentTime(0);
-            audioRef.current.currentTime = 0;
             if (isPlaying) {
                 audioRef.current.play();
             } else {
                 audioRef.current.pause();
             }
         }
-    }, [song, isPlaying]);
+    }, [isPlaying]);
+
+    useEffect(() => {
+        if (audioRef.current) {
+            setCurrentTime(0);
+            audioRef.current.currentTime = 0;
+            if (isPlaying) {
+                audioRef.current.play();
+            }
+        }
+    }, [song]);
 
     const handleVolumeChange = (e) => {
         const sliderValue = e.target.value;

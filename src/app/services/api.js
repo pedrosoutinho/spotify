@@ -62,8 +62,6 @@ export const fetchSongs = async () => {
     }
 };
 
-//updateUser do api.js
-
 export const updateUser = async (user) => {
     try {
         const { id, ...userData } = user;
@@ -83,3 +81,52 @@ export const updateUser = async (user) => {
         throw error;
     }
 };
+
+
+export const registerPlaylist = async (playlist) => {
+    try {
+        const response = await axios.post(`${API_URL}/playlists`, playlist);
+        return response.data;
+    } catch (error) {
+        throw error;
+    }
+};
+
+export const deletePlaylist = async (playlistId) => {
+    try {
+        await axios.delete(`${API_URL}/playlists/${playlistId}`);
+        return { success: true };
+    } catch (error) {
+        throw error;
+    }
+};
+
+export const addSongToPlaylist = async (playlistId, songId) => {
+    try {
+        const response = await axios.get(`${API_URL}/playlists/${playlistId}`);
+        const playlist = response.data;
+
+        if (!playlist.songs.includes(songId)) {
+            playlist.songs.push(songId);
+        }
+
+        const updateResponse = await axios.put(`${API_URL}/playlists/${playlistId}`, playlist);
+        return updateResponse.data;
+    } catch (error) {
+        throw error;
+    }
+};
+
+export const deleteSongFromPlaylist = async (playlistId, songId) => {
+    try {
+        const response = await axios.get(`${API_URL}/playlists/${playlistId}`);
+        const playlist = response.data;
+        playlist.songs = playlist.songs.filter(song => song !== songId);
+        await axios.put(`${API_URL}/playlists/${playlistId}`, playlist);
+        return { success: true };
+    } catch (error) {
+        throw error;
+    }
+};
+
+
