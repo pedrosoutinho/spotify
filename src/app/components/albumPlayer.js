@@ -124,6 +124,7 @@ export default function AlbumPlayer({ albumId }) {
                         </thead>
                         <tbody>
                             {songs.map((song, index) => (
+                                console.log(song),
                                 <tr key={song.id}>
                                     <td>{index + 1}</td>
                                     <td>{song.title}</td>
@@ -134,7 +135,7 @@ export default function AlbumPlayer({ albumId }) {
                                                 title: song.title,
                                                 artist: song.artist,
                                                 albumCover: `/a${song.albumId}/cover.png`,
-                                                src: `/a${song.albumId}/${index + 1}.flac`,
+                                                src: `/a${song.albumId}/${song.trackNumber}.flac`,
                                                 duration: song.duration
                                             }}
                                             onPlay={handlePlay}

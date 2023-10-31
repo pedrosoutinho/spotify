@@ -6,7 +6,7 @@ import UserContext from '../components/userContext.js';
 import { updateUser } from '../services/api.js';
 
 export default function EditProfile() {
-    const { user } = useContext(UserContext);
+    const { user, updateUserContext } = useContext(UserContext);
 
     const [name, setName] = useState(user.name);
     const [email, setEmail] = useState(user.email);
@@ -49,6 +49,8 @@ export default function EditProfile() {
                 password
             };
             await updateUser(updatedUser);
+            updateUserContext(updatedUser);
+
             Swal.fire({
                 icon: 'success',
                 title: 'Profile updated successfully!',
