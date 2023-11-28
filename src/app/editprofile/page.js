@@ -8,6 +8,14 @@ import { updateUser } from '../services/api.js';
 export default function EditProfile() {
     const { user, updateUserContext } = useContext(UserContext);
 
+    if (!user) {
+        return (
+            <main>
+                <p> Usuário não encontrado </p>
+            </main>
+        );
+    }
+
     const [name, setName] = useState(user.name);
     const [email, setEmail] = useState(user.email);
     const [password, setPassword] = useState('');
