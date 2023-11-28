@@ -13,9 +13,3 @@ yarn dev
 # or
 pnpm dev
 ```
-
-Second, run the json mock server
-
-```bash
-npm run json-server
-```
