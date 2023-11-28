@@ -27,6 +27,7 @@ export default function AlbumGrid() {
     return (
         <div className="albumGrid">
             {albums.map((album) => (
+                album.creator === "public" &&
                 <Link href={`/playlists/currently_playing?id=${album.id}`} key={album.id}>
                     <div className="albumItem">
                         <img src={`/a${album.id}/cover.png`} alt={album.name} />
