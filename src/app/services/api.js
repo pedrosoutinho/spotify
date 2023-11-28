@@ -1,6 +1,6 @@
-import axios from 'axios'
+import axios from "axios";
 
-const API_URL = 'http://localhost:3001';
+const API_URL = "http://localhost:3001";
 
 export const loginUser = async (credentials) => {
     try {
@@ -10,7 +10,7 @@ export const loginUser = async (credentials) => {
         if (users.length === 1 && users[0].password === password) {
             return { success: true, user: users[0] };
         } else {
-            throw new Error('Invalid credentials');
+            throw new Error("Invalid credentials");
         }
     } catch (error) {
         throw error;
@@ -27,7 +27,7 @@ export const doesEmailExist = async (email) => {
 };
 
 export const registerUser = async (user) => {
-    try{
+    try {
         const response = await axios.post(`${API_URL}/users`, user);
         return response.data;
     } catch (error) {
@@ -65,23 +65,24 @@ export const fetchSongs = async () => {
 export const updateUser = async (user) => {
     try {
         const { id, ...userData } = user;
-        const storedUser = JSON.parse(localStorage.getItem('user'));
+        const storedUser = JSON.parse(localStorage.getItem("user"));
+
+        delete userData._id;
 
         if (storedUser && storedUser.id === id) {
             const response = await axios.put(`${API_URL}/users/${id}`, userData);
             const updatedUser = response.data;
 
-            localStorage.setItem('user', JSON.stringify(updatedUser));
+            localStorage.setItem("user", JSON.stringify(updatedUser));
 
             return updatedUser;
         } else {
-            throw new Error('User not found in local storage');
+            throw new Error("User not found in local storage");
         }
     } catch (error) {
         throw error;
     }
 };
-
 
 export const registerPlaylist = async (playlist) => {
     try {
@@ -110,7 +111,12 @@ export const addSongToPlaylist = async (playlistId, songId) => {
             playlist.songs.push(songId);
         }
 
-        const updateResponse = await axios.put(`${API_URL}/playlists/${playlistId}`, playlist);
+        delete playlist._id;
+
+        const updateResponse = await axios.put(
+            `${API_URL}/playlists/${playlistId}`,
+            playlist,
+        );
         return updateResponse.data;
     } catch (error) {
         throw error;
@@ -121,12 +127,11 @@ export const deleteSongFromPlaylist = async (playlistId, songId) => {
     try {
         const response = await axios.get(`${API_URL}/playlists/${playlistId}`);
         const playlist = response.data;
-        playlist.songs = playlist.songs.filter(song => song !== songId);
+        playlist.songs = playlist.songs.filter((song) => song !== songId);
+        delete playlist._id;
         await axios.put(`${API_URL}/playlists/${playlistId}`, playlist);
         return { success: true };
     } catch (error) {
         throw error;
     }
 };
-
-
